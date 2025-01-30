@@ -36,6 +36,11 @@ class CategoryController extends Controller
         ]);
 
         $res =  Category::query()->create($validated);
+        return response()->json([
+           'status'=>'success',
+           'data'=> 'Category added successfully',
+            'redirect'=>route('categories.index'),
+        ]);
         return redirect()->route('categories.index')->with('success','Category added successfully');
     }
 
@@ -69,6 +74,14 @@ class CategoryController extends Controller
         ]);
 
         $category->update($validated);
+
+
+        return response()->json([
+           'status'=>'success',
+           'data'=> 'Category updated successfully',
+           'redirect'=>route('categories.index'),
+        ]);
+
         return redirect()->route('categories.index')->with('success','Category updated successfully');
     }
 

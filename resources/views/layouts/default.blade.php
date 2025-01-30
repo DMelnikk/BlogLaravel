@@ -39,6 +39,9 @@
 <!-- Colors for this template -->
 <link href="{{asset('assets/front/css/colors.css')}}" rel="stylesheet">
 
+
+    @stack('styles')
+
 <!-- Version Marketing CSS for this template -->
 <link href="{{asset('assets/front/css/version/marketing.css')}}" rel="stylesheet">
 
@@ -208,6 +211,13 @@
 
     <div class="dmtop">Scroll to Top</div>
 
+    <div class="iziModal-alert-success">
+
+    </div>
+    <div class="iziModal-alert-error">
+
+    </div>
+
 </div><!-- end wrapper -->
 
 <!-- Core JavaScript
@@ -216,6 +226,9 @@
 <script src="{{asset('assets/front/js/tether.min.js')}}"></script>
 <script src="{{asset('assets/front/js/bootstrap.min.js')}}"></script>
 <script src="{{asset('assets/front/js/animate.js')}}"></script>
+
+@stack('scripts')
+
 <script src="{{asset('assets/front/js/custom.js')}}"></script>
 
 </body>

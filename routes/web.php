@@ -13,8 +13,16 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/',[\App\Http\Controllers\PostController::class,'index'])->name('home');
 Route::get('/post/{slug}',[\App\Http\Controllers\PostController::class,'show'])->name('posts.single');
+Route::get('/search',[\App\Http\Controllers\PostController::class,'search'])->name('posts.search');
 Route::get('/category/{slug}',[\App\Http\Controllers\CategoryController::class,'show'])->name('categories.single');
+Route::get('/tag/{slug}',[\App\Http\Controllers\TagController::class,'show'])->name('tags.single');
 Route::post('/comments',[\App\Http\Controllers\CommentController::class,'store'])->name('comments.store');
+
+Route::get('/contact',[\App\Http\Controllers\ContactController::class,'index'])->name('contact');
+Route::post('/contact/send',[\App\Http\Controllers\ContactController::class,'send'])->name('contact.send');
+
+
+
 
 Route::middleware('guest')->group(function () {
     Route::get('/login',[UserController::class,'login'])->name('login');

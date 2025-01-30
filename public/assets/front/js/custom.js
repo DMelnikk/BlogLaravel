@@ -43,6 +43,67 @@
         return false;
     });
 
+
+    $('.comment-form').on('submit', function(e) {
+       e.preventDefault();
+
+       let iziModalAlertSuccess = $('.iziModal-alert-success');
+       let iziModalAlertError = $('.iziModal-alert-error');
+
+       iziModalAlertSuccess.iziModal({
+          padding: 20,
+          title: 'Success',
+          headerColor: '#00897b'
+       });
+
+        iziModalAlertError.iziModal({
+            padding: 20,
+            title: 'Error',
+            headerColor: '#e53935'
+        });
+
+       let form = $(this);
+       let btn = form.find('button');
+       let btnText = btn.text();
+       let commentsList = $('.comments-list');
+
+       $.ajax({
+           url: form.attr('action'),
+           type: 'POST',
+           data: form.serialize(),
+           beforeSend: function() {
+             btn.prop('disabled', true).text('Loading...');
+           },
+           success: function (res) {
+               if(res.status === 'success') {
+                   iziModalAlertSuccess.iziModal(
+                    'setContent',{
+                        content: res.data,
+                       }
+                   );
+                   iziModalAlertSuccess.iziModal('open');
+                   form.trigger('reset');
+                   commentsList.prepend(res.comment);
+                   $('html,body').animate({
+                      scrollTop: $('#comments').offset().top
+                   },500);
+               } else {
+                   iziModalAlertError.iziModal(
+                       'setContent',{
+                           content: res.data,
+                       }
+                   );
+                   iziModalAlertError.iziModal('open');
+               }
+               btn.prop('disabled', false).text(btnText);
+           },
+           error: function () {
+               alert('Something went wrong!');
+               btn.prop('disabled', false).text(btnText);
+           }
+       });
+    });
+
 })(jQuery);
 
 
@@ -65,4 +126,4 @@ function openCategory(evt, catName) {
     // Show the current tab, and add an "active" class to the link that opened the tab
     document.getElementById(catName).style.display = "block";
     evt.currentTarget.className += " active";
-} 
+}

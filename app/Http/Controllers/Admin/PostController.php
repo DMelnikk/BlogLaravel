@@ -48,6 +48,13 @@ class PostController extends Controller
         $post = Post::query()->create($validated);
         // sync он добавляет в таблицу post_tag , id - поста и id - тега , синхронизирует таким образом
         $post->tags()->sync($request->get('tags'));
+
+        return response()->json([
+            'status'=>'success',
+            'data'=> 'Post added successfully',
+            'redirect'=>route('posts.index'),
+        ]);
+
         return redirect()->route('posts.index')->with('success','Post added successfully.');
     }
 
@@ -88,6 +95,13 @@ class PostController extends Controller
         ]);
         $post->update($validated);
         $post->tags()->sync($request->get('tags'));
+
+        return response()->json([
+            'status'=>'success',
+            'data'=> 'Post updated successfully',
+            'redirect'=>route('posts.index'),
+        ]);
+
         return redirect()->route('posts.index')->with('success','Post updated successfully.');
 
     }
@@ -113,6 +127,7 @@ class PostController extends Controller
         // ищем пост который , именно которые помеченны к удалению , так как findorfail ищет просто посты
         $post = Post::withTrashed()->findOrFail($id);
         $post->restore();
+
         return redirect()->route('admin.posts.basket')->with('success','Post restored successfully.');
 
 

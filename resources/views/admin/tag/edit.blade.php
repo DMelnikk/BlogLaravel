@@ -42,7 +42,7 @@
                               @endif
 
 
-                              <form class="form-horizontal" method="post" action="{{route('tags.update',['tag'=>$tag->id])}}">
+                              <form class="form-horizontal ajax-form" method="post" action="{{route('tags.update',['tag'=>$tag->id])}}">
                                   @csrf
                                   @method('PUT')
                                   <div class="card-body">

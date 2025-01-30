@@ -36,6 +36,14 @@ class TagController extends Controller
         ]);
 
         $res =  Tag::query()->create($validated);
+
+        return response()->json([
+            'status'=>'success',
+            'data'=> 'Tag added successfully',
+            'redirect'=>route('tags.index'),
+        ]);
+
+
         return redirect()->route('tags.index')->with('success','Tag added successfully');
     }
 
@@ -69,6 +77,15 @@ class TagController extends Controller
         ]);
 
         $tag->update($validated);
+
+
+        return response()->json([
+            'status'=>'success',
+            'data'=> 'Tag updated successfully',
+            'redirect'=>route('tags.index'),
+        ]);
+
+
         return redirect()->route('tags.index')->with('success','Tag updated successfully');
     }
 

@@ -41,7 +41,7 @@
                               @endif
 
 
-                              <form class="form-horizontal" method="post" action="{{route('categories.update',['category'=>$category->id])}}">
+                              <form class="form-horizontal ajax-form" method="post" action="{{route('categories.update',['category'=>$category->id])}}">
                                   @csrf
                                   @method('PUT')
                                   <div class="card-body">

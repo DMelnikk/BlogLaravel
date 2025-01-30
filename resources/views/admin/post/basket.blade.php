@@ -67,7 +67,7 @@
                                                 <a href="{{route('admin.posts.basket.restore',['post'=>$post->id])}}" class="btn btn-primary">Restore</a>
 
 
-                                                <form action="{{route('admin.posts.basket.remove',['post'=>$post->id])}}" method="post">
+                                                <form action="{{route('admin.posts.basket.remove',['post'=>$post->id])}}"  method="post">
                                                     @csrf
                                                     @method('DELETE')
                                                 <button  onclick="return confirm('Confirm action')" class="btn btn-danger">Delete</button>

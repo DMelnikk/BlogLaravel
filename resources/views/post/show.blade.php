@@ -3,6 +3,14 @@
 @section('title',"Markedia :: {$post->title}")
 @section('meta_desc',"{$post->meta_desc}")
 
+@push('scripts')
+    <script src="{{asset('assets/iziModal/js/iziModal.js')}}"></script>
+@endpush
+
+@push('styles')
+    <link rel="stylesheet" href="{{asset('assets/iziModal/css/iziModal.css')}}">
+@endpush
+
 @section('content')
     <div class="page-wrapper">
         <div class="blog-title-area">
@@ -46,7 +54,7 @@
             <div class="tag-cloud-single">
                 <span>Tags</span>
                 @foreach($post->tags as $tag)
-                    <small><a href="#" title="">{{$tag->title}}</a></small>
+                    <small><a href="{{route('tags.single',['slug'=>$tag->slug])}}" title="">{{$tag->title}}</a></small>
                 @endforeach
             </div><!-- end meta -->
             @endif
@@ -75,7 +83,7 @@
             <h4 class="small-title">About author</h4>
             <div class="row">
                 <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
-                    <img src="upload/author.jpg" alt="" class="img-fluid rounded-circle">
+                    <img src="{{asset('assets/front/upload/author.jpg')}}" alt="" class="img-fluid rounded-circle">
                 </div><!-- end col -->
 
                 <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
@@ -139,7 +147,8 @@
                                 </a>
                                 <div class="media-body">
                                     <h4 class="media-heading user_name">{{$comment->name}} <small>{{\Carbon\Carbon::createFromFormat('Y-m-d H:i:s',$comment->created_at)->diffForHumans()}}</small></h4>
-                                    <p>{{$comment->comment}}</p>
+                                    <!-- e это htmlspecialchairs -->
+                                    <p>{!!  nl2br(e($comment->comment)) !!}</p>
                                 </div>
                             </div>
                         @endforeach

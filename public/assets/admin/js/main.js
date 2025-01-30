@@ -22,5 +22,84 @@ document.addEventListener("DOMContentLoaded", function() {
 
 $(function () {
     $('.select2').select2();
+
+    toastr.options = {
+        "closeButton": false,
+        "debug": false,
+        "newestOnTop": false,
+        "progressBar": true,
+        "positionClass": "toast-top-full-width",
+        "preventDuplicates": false,
+        "onclick": null,
+        "showDuration": "300",
+        "hideDuration": "1000",
+        "timeOut": "5000",
+        "extendedTimeOut": "1000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "slideDown",
+        "hideMethod": "slideUp"
+    }
+
+        // toastr.success('Welcome to Admin Panel');
+
+    function updateCKEditors() {
+        for (let editor in CKEDITOR.instances) {
+            CKEDITOR.instances[editor].updateElement();
+        }
+    }
+
+    $('.ajax-form').on('submit', function (e) {
+        e.preventDefault();
+
+        updateCKEditors();
+
+        let form = $(this);
+        let btn = form.find('button[type=submit]');
+        let btnText = btn.text();
+        let action = form.attr('action');
+        let method = form.attr('method');
+        if (method) {
+            method = method.toLowerCase();
+        }
+
+        $.ajax({
+            url: action,
+            type: method === 'get' ? 'get' : 'post',
+            data: form.serialize(),
+            beforeSend: function () {
+                btn.prop('disabled', true).text('Sending...');
+            },
+            success: function (res) {
+                if (res.status === 'success') {
+                    if (res.redirect) {
+                        toastr.options.onHidden = function() {
+                            location = res.redirect;
+                        };
+                    }
+                    toastr.success(res.data);
+
+                    if (res.clear) {
+                        form.trigger('reset');
+                    }
+                }
+            },
+            error: function (data) {
+                if (data.status === 422) {
+                    let errors = data.responseJSON;
+                    let output = '<ul>';
+                    $.each(errors.errors, function (key, value) {
+                        output += `<li>${value[0]}</li>`;
+                    });
+                    output += '</ul>';
+                    toastr.error(output);
+                }
+            },
+            complete: function () {
+                btn.prop('disabled', false).text(btnText);
+            },
+        });
+    });
+
 });
 

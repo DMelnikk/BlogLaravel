@@ -42,7 +42,7 @@
                               @endif
 
 
-                              <form class="form-horizontal" method="post" action="{{route('tags.store')}}">
+                              <form class="form-horizontal ajax-form" method="post" action="{{route('tags.store')}}">
                                   @csrf
                                   <div class="card-body">
 

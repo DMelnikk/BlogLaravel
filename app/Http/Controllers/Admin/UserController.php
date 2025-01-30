@@ -45,6 +45,14 @@ class UserController extends Controller
         $user->password = ($request->input('password'));
         $user->is_admin = $request->boolean('is_admin');
         $user->save();
+
+        return response()->json([
+            'status'=>'success',
+            'data'=> 'User added successfully',
+            'redirect'=>route('users.index'),
+        ]);
+
+
         return redirect()->route('users.index')->with('success','User created successfully');
     }
 
@@ -88,6 +96,15 @@ class UserController extends Controller
             $user->password = $request->input('password');
         }
         $user->save();
+
+
+        return response()->json([
+            'status'=>'success',
+            'data'=> 'User updated successfully',
+            'redirect'=>route('users.index'),
+        ]);
+
+
         return redirect()->route('users.index')->with('success','User updated successfully');
 
     }

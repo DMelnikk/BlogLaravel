@@ -8,23 +8,20 @@
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="marketing-index.html">Home</a>
+                        <a class="nav-link" href="{{route('home')}}">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="marketing-category.html">Marketing</a>
+                        <a class="nav-link" href="{{route('categories.single',['slug'=>'marketing'])}}">Marketing</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="marketing-category.html">Make Money</a>
+                        <a class="nav-link" href="{{route('categories.single',['slug'=>'make-money'])}}">Make Money</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="marketing-blog.html">Blog</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="marketing-contact.html">Contact Us</a>
+                        <a class="nav-link" href="{{route('contact')}}">Contact Us</a>
                     </li>
                 </ul>
-                <form class="form-inline">
-                    <input class="form-control mr-sm-2" type="text" placeholder="How may I help?">
+                <form class="form-inline" method="get" action="{{route('posts.search')}}">
+                    <input name="search" class="form-control mr-sm-2" type="text" placeholder="How may I help?" required>
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                 </form>
             </div>

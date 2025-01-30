@@ -15,7 +15,11 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.3.0/styles/overlayscrollbars.min.css" integrity="sha256-dSokZseQNT08wYEWiz5iLI8QPlKxG+TswNRD8k35cpg=" crossorigin="anonymous">
     <link rel="stylesheet" href="{{asset('assets/admin/colorbox/colorbox.css')}}">
     <link rel="stylesheet" href="{{asset('assets/admin/select2/css/select2.min.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/toastr/toastr.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/admin/css/adminlte.css')}}">
+
+
+
     <style>
         .cke_notifications_area {
             display: none;
@@ -39,7 +43,6 @@
 
 
 
-                </form>
             </ul> <!--end::Start Navbar Links--> <!--begin::End Navbar Links-->
             <ul class="navbar-nav ms-auto"> <!--begin::Navbar Search-->
                 <li class="nav-item"> <a class="nav-link" data-widget="navbar-search" href="#" role="button"> <i class="bi bi-search"></i> </a> </li> <!--end::Navbar Search--> <!--begin::Messages Dropdown Menu-->
@@ -167,7 +170,10 @@
 <script src="{{asset('assets/admin/colorbox/jquery.colorbox-min.js')}}"></script>
 <script src="{{asset('packages/barryvdh/elfinder/js/standalonepopup.js')}}"></script>
 <script src="{{asset('assets/admin/select2/js/select2.min.js')}}"></script>
+<script src="{{asset('assets/toastr/toastr.min.js')}}"></script>
 <script src="{{asset('assets/admin/js/main.js')}}"></script>
+
+
 
 
 

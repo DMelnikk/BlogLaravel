@@ -42,4 +42,11 @@ class PostController extends Controller
 
         return view('post.show',compact('post','related_posts','comments'));
     }
+
+    public function search(Request $request)
+    {
+        // withQueryString сохраняет get параметры
+        $posts = Post::query()->whereLike('title','%'. $request->search .'%')->with('category')->paginate(2)->withQueryString();
+        return view('post.search',compact('posts'));
+    }
 }
